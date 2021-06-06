@@ -1,0 +1,33 @@
+﻿@model CarritoPedidos.Models.ViewModels.ListProductViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<div>
+    <h2>Agregar producto</h2>
+</div>
+
+@using (Html.BeginForm("Create", "Product", FormMethod.Post)) {
+<div class="row" style="margin-top:20px">
+    <div class="col">
+        <div>
+            @Html.LabelFor(d => d.Name)
+            @Html.TextBoxFor(d => d.Name, "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(d => d.Name,"",new {style="color:red"})
+        </div>
+        <div style="margin-top:20px">
+            @Html.LabelFor(d => d.Description)
+            @Html.TextBoxFor(d => d.Description, "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(d => d.Description, "", new { style = "color:red" })
+        </div>
+        <div style="margin-top:20px">
+            @Html.LabelFor(d => d.Price)
+            @Html.TextBoxFor(d => d.Price, "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(d => d.Price, "", new { style = "color:red" })
+        </div>
+    </div>
+    <div class="col" style="margin-top:20px">
+        <input type="submit" class="btn btn-primary" value="Guardar" />
+    </div>
+</div>
+}
