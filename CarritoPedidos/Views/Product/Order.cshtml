@@ -1,0 +1,40 @@
+﻿@model List<CarritoPedidos.Models.ViewModels.ListProductViewModel>
+@{
+    ViewBag.Title = "Agregar productos";
+}
+<div class="row">
+    <h2>@ViewBag.title</h2>
+</div>
+<div class="row" style="margin-top:10px">
+    <div>
+        <table class="table">
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+            </tr>
+            @foreach (var oProduct in Model)
+            {
+                <tr>
+                    <td>
+                        @oProduct.Name
+                    </td>
+                    <td>
+                        @oProduct.Description
+                    </td>
+                    <td>
+                        $ @oProduct.Price
+                    </td>
+                    <td>
+                        <input type="number" value="" style="width:60px" />
+                    </td>
+                </tr>
+            }
+        </table>
+        <div class="col" style="margin-top:20px">
+            <input type="submit" class="btn btn-primary" value="Realizar pedido" style="width: 100%" />
+        </div>
+    </div>
+</div>
+
