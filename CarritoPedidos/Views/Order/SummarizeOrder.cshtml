@@ -13,7 +13,7 @@
                 <th>Total</th>
             </tr>
             @{ double total = 0;}
-            @if (Session["Carrito"] != null)
+            @if (Session["Order"] != null)
             {
                 foreach (var oProduct in Session["Order"] as List<CarritoPedidos.Models.ViewModels.OrderProductViewModel>)
                 {
@@ -30,6 +30,9 @@
                         </td>
                         <td>
                             $ @(oProduct.Quantity*oProduct.Product.Price)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Quitar", "DeleteProduct", "Order", new { Id = oProduct.Product.Id }, null)
                         </td>
                     </tr>
                 }
