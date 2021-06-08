@@ -1,0 +1,50 @@
+﻿@model List<CarritoPedidos.Models.ViewModels.OrderProductViewModel>
+@{
+    ViewBag.Title = "AddProduct";
+}
+<h2>Pedido</h2>
+
+<div class="row" style="margin-top:10px">
+    <div>
+        <table class="table">
+            <tr>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+            </tr>
+            @{  double total = 0;}
+            @foreach (var oProduct in Session["Order"] as List<CarritoPedidos.Models.ViewModels.OrderProductViewModel>)
+
+
+
+            {
+                total += (double)(oProduct.Quantity * oProduct.Product.Price);
+                <tr>
+                    <td>
+                        @oProduct.Product.Name
+                    </td>
+                    <td>
+                        $ @oProduct.Product.Price
+                    </td>
+                    <td>
+                        @oProduct.Quantity
+                    </td>
+                    <td>
+                        $ @(oProduct.Quantity*oProduct.Product.Price)
+                    </td>
+                </tr>
+            }
+            <tfoot>
+                <tr>
+                    <th colspan="3">
+                        Total
+                    </th>
+                    <td>
+                        $ @total
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

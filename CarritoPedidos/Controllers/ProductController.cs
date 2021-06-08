@@ -117,24 +117,5 @@ namespace CarritoPedidos.Controllers
             return Redirect("~/Product/");
         }
 
-        public ActionResult Order()
-        {
-
-            List<ListProductViewModel> lst;
-            using (CarritoPedidosEntities db = new CarritoPedidosEntities())
-            {
-                lst = (from d in db.Product
-                       select new ListProductViewModel
-                       {
-                           Id = d.id,
-                           Name = d.name,
-                           Description = d.description,
-                           Price = (float)d.price
-                       }).ToList();
-            }
-
-
-            return View(lst);
-        }
     }
 }

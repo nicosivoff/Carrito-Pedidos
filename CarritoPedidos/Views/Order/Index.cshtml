@@ -1,0 +1,72 @@
+﻿@model List<CarritoPedidos.Models.ViewModels.ListProductViewModel>
+@{
+    ViewBag.Title = "Agregar productos";
+}
+<div class="row">
+    <h2>@ViewBag.title</h2>
+</div>
+<div class="row" style="margin-top:10px">
+    <div>
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio unitario</th>
+                <th>Cantidad</th>
+            </tr>
+            @foreach (var oProduct in Model)
+            {
+                <tr>
+                    <td class="">
+                        @oProduct.Id
+                    </td>
+                    <td>
+                        @oProduct.Name
+                    </td>
+                    <td>
+                        @oProduct.Description
+                    </td>
+                    <td>
+                        $ @oProduct.Price
+                    </td>
+                    <td>
+                        <input type="number" value="0" style="width:60px" min="0" />
+                    </td>
+                    <td>
+                        @Html.ActionLink("Agregar", "AddProduct", "Order", new {Id=oProduct.Id}, null)
+                    </td>
+                </tr>
+            }
+        </table>
+        <div class="col" style="margin-top:20px">
+            <input type="submit" class="btn btn-primary disabled" value="Finalizar pedido" style="width: 100%" id="input-realize-order" onclick="" />
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jquery")
+<script>
+
+    function validateQuantities() {
+        var bool = false;
+        $('.table input[type=number]').each(function () {
+            var valor = $(this).val();
+            if (valor !== "" && valor > 0) {
+                bool = true;
+            }
+        });
+        return bool;
+    }
+
+    $("#input-realize-order").click(function () {
+        if (!validateQuantities()) {
+            alert("Debe ingresar la cantidad de algún producto.");
+        } else {
+            alert("Correcto");
+        }
+    });
+
+</script>
+
+
+
