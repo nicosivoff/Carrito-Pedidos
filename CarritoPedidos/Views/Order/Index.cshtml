@@ -13,7 +13,7 @@
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Precio unitario</th>
-                <th>Cantidad</th>
+                <!--<th>Cantidad</th>-->
             </tr>
             @foreach (var oProduct in Model)
             {
@@ -30,17 +30,17 @@
                     <td>
                         $ @oProduct.Price
                     </td>
+                    <!--<td>
+                    <input type="number" value="0" style="width:60px" min="0" />
+                </td>-->
                     <td>
-                        <input type="number" value="0" style="width:60px" min="0" />
-                    </td>
-                    <td>
-                        @Html.ActionLink("Agregar", "AddProduct", "Order", new {Id=oProduct.Id}, null)
+                        @Html.ActionLink("Agregar", "AddProduct", "Order", new { Id = oProduct.Id }, null)
                     </td>
                 </tr>
             }
         </table>
-        <div class="col" style="margin-top:20px">
-            <input type="submit" class="btn btn-primary disabled" value="Finalizar pedido" style="width: 100%" id="input-realize-order" onclick="" />
+        <div class="col" style="margin-top:20px; text-align:right">
+            @Html.ActionLink("Finalizar pedido", "SummarizeOrder", "Order", null, null)
         </div>
     </div>
 </div>
