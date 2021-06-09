@@ -29,13 +29,13 @@ namespace CarritoPedidos.Controllers
         }
 
 
-        public ActionResult AddProduct(int Id)
+        public ActionResult AddProduct(int Id, int Quantity)
         {
 
             if (Session["Order"] == null)
             {
                 List<OrderProductViewModel> lst = new List<OrderProductViewModel>();
-                AddToList(Id, lst);
+                AddToList(Id, Quantity, lst);
                 Session["Order"] = lst;
 
             }
@@ -52,16 +52,16 @@ namespace CarritoPedidos.Controllers
                 }
 
                 if (indexProduct == -1)
-                    AddToList(Id, lst);
+                    AddToList(Id, Quantity, lst);
                 else
-                    lst[indexProduct].Quantity++;
+                    lst[indexProduct].Quantity += Quantity;
 
                 Session["Order"] = lst;
             }
             return Redirect("~/Order/");
         }
 
-        private void AddToList(int Id, List<OrderProductViewModel> lst)
+        private void AddToList(int Id, int Quantity, List<OrderProductViewModel> lst)
         {
             using (CarritoPedidosEntities db = new CarritoPedidosEntities())
             {
@@ -71,7 +71,7 @@ namespace CarritoPedidos.Controllers
                 Product.Name = oProduct.name;
                 Product.Description = oProduct.description;
                 Product.Price = (float)oProduct.price;
-                lst.Add(new OrderProductViewModel(Product, 1));
+                lst.Add(new OrderProductViewModel(Product, Quantity));
             }
         }
 

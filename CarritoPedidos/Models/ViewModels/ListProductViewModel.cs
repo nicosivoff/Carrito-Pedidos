@@ -20,5 +20,6 @@ namespace CarritoPedidos.Models.ViewModels
         [Required]
         [Display(Name = "Precio")]
         public float Price { get; set; }
+        public int Quantity { get; set; }
     }
 }

@@ -27,15 +27,16 @@
                         $ @oProduct.Price
                     </td>
                     <td>
-                        <input type="number" value="0" min="0" style="width:20%"/>
+                        <input type="number" value="0" min="0" style="width:20%" id="@oProduct.Id" />
                     </td>
                     <td>
-                        @Html.ActionLink("Agregar", "AddProduct", "Order", new { Id = oProduct.Id }, null)
+                        
+                        <a href="#" onclick="realizeOrder(@oProduct.Id)">Agregar</a>
                     </td>
                 </tr>
             }
         </table>
-        <div class="col" style="margin-top:20px; text-align:">
+        <div class="col" style="margin-top:20px">
             <a class="btn btn-primary" href="~/Order/SummarizeOrder" style="width:100%">Finalizar pedido</a>
         </div>
     </div>
@@ -54,13 +55,12 @@
         return bool;
     }
 
-    $("#input-realize-order").click(function () {
-        if (!validateQuantities()) {
-            alert("Debe ingresar la cantidad de algún producto.");
-        } else {
-            alert("Correcto");
-        }
-    });
+    function realizeOrder(id) {
+        var quantity = $("#" + id).val();
+
+        var url = '@Url.Action("AddProduct", "Order")?Id=' + id + "&Quantity=" + quantity;
+        window.location.href = url;
+    }
 
 </script>
 
