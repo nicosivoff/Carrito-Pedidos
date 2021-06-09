@@ -4,9 +4,6 @@
 }
 <div class="row">
     <h2>@ViewBag.title</h2>
-    <div style="text-align:right; padding:5px">
-        <input type="button" name="name" value="Agregar producto" onclick="window.location.href='Product/Create'" class="btn btn-primary" />
-    </div>
 </div>
 <div class="row" style="margin-top:10px">
     <div>
@@ -19,22 +16,23 @@
             @foreach (var oProduct in Model)
             {
                 <tr>
-                     <td>
-                         @oProduct.Name
-                     </td>
-                     <td>
-                         @oProduct.Description
-                     </td>
-                     <td>
-                         $ @oProduct.Price   
-                     </td>
-                     <td>
-                         <a class="btn btn-default" href="~/Product/Edit/@oProduct.Id">Editar</a>
-                         <a class="btn btn-danger" href="~/Product/Delete/@oProduct.Id">Eliminar</a>
-                     </td>
+                    <td>
+                        @oProduct.Name
+                    </td>
+                    <td>
+                        @oProduct.Description
+                    </td>
+                    <td>
+                        $ @oProduct.Price
+                    </td>
+                    <td>
+                        <a class="btn btn-default" href="~/Product/Edit/@oProduct.Id">Editar</a>
+                        <a class="btn btn-danger" href="~/Product/Delete/@oProduct.Id">Eliminar</a>
+                    </td>
                 </tr>
             }
         </table>
     </div>
+    <input type="button" name="name" value="Agregar producto" onclick="window.location.href='Product/Create'" class="btn btn-primary"  />
 </div>
 

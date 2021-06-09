@@ -28,7 +28,6 @@ namespace CarritoPedidos.Controllers
             return View(lst);
         }
 
-
         public ActionResult AddProduct(int Id, int Quantity)
         {
 
@@ -54,7 +53,7 @@ namespace CarritoPedidos.Controllers
                 if (indexProduct == -1)
                     AddToList(Id, Quantity, lst);
                 else
-                    lst[indexProduct].Quantity += Quantity;
+                    lst[indexProduct].Quantity+= Quantity;
 
                 Session["Order"] = lst;
             }

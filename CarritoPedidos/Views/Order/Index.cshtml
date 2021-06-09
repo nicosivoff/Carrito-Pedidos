@@ -27,11 +27,10 @@
                         $ @oProduct.Price
                     </td>
                     <td>
-                        <input type="number" value="0" min="0" style="width:20%" id="@oProduct.Id" />
+                        <input type="number" value="0" min="0" style="width:20%" id="input-@oProduct.Id" />
                     </td>
                     <td>
-                        
-                        <a href="#" onclick="realizeOrder(@oProduct.Id)">Agregar</a>
+                        <a href="#" onclick="showModal(@oProduct.Id, '@oProduct.Name')">Agregar</a>
                     </td>
                 </tr>
             }
@@ -41,27 +40,61 @@
         </div>
     </div>
 </div>
+<div class="modal" tabindex="-1" role="dialog" id="modal-confirmation">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="font-size:18px"><strong>¿Está seguro que quiere agregar este producto al carrito?</strong></h5>
+            </div>
+            <div class="modal-body">
+                <p style="font-size:16px">Producto: <span id="product-name"></span></p>
+                <p style="font-size:16px">Cantidad: <span id="product-quantity"></span></p>
+                <span id="product-id" class="hidden"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="addProduct()">Agregar al carrito</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('#modal-confirmation').hide();"> Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="modal-alert">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="font-size:20px">Alerta</h5>
+            </div>
+            <div class="modal-body">
+                <p style="font-size:16px">La cantidad del producto a agregar debe ser mayor a 0</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('#modal-alert').hide();"> Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 @Scripts.Render("~/bundles/jquery")
 <script>
 
-    function validateQuantities() {
-        var bool = false;
-        $('.table input[type=number]').each(function () {
-            var valor = $(this).val();
-            if (valor !== "" && valor > 0) {
-                bool = true;
-            }
-        });
-        return bool;
+    function showModal(id, productName) {
+        var quantity = $("#input-" + id).val();
+        if (quantity > 0) {
+            $("#product-name").text(productName);
+            $("#product-quantity").text(quantity);
+            $("#product-id").text(id);
+            $("#modal-confirmation").show();
+        } else {
+            $("#modal-alert").show();
+        }
     }
 
-    function realizeOrder(id) {
-        var quantity = $("#" + id).val();
-
+    function addProduct() {
+        $("#modal-confirmation").hide();
+        var id = $("#product-id").text();
+        var quantity = $("#product-quantity").text();
         var url = '@Url.Action("AddProduct", "Order")?Id=' + id + "&Quantity=" + quantity;
         window.location.href = url;
     }
-
 </script>
 
 
